@@ -8,8 +8,9 @@ import com.spotify.Oauth2.utils.DataLoader;
 import com.spotify.Oauth2.utils.Fakerutils;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
-
 import static com.spotify.Oauth2.api.StatusCodes.*;
 import static com.spotify.Oauth2.utils.Fakerutils.generateDescription;
 import static com.spotify.Oauth2.utils.Fakerutils.generateName;
@@ -18,8 +19,8 @@ import static org.hamcrest.Matchers.equalTo;
 
 @Epic("Spotify Oauth2.0")
 @Feature("Playlist Creation Apis")
-public class PlaylistTests extends BaseTest{
 
+public class PlaylistTests extends BaseTest{
     @Link("https://example.org")
     @Link(name = "allure", type = "mylink")
     @Issue("123567")
@@ -34,7 +35,10 @@ public class PlaylistTests extends BaseTest{
 
         Playlist playlistresponse = response.as(Playlist.class);
         AssertionResponse(playlistrequest,playlistresponse);
+        System.out.println("Playlist is created");
     }
+
+
     @Test(description = "Test Will Get a Playlist")
     public void AbleToGetAPlaylist(){
         Playlist playlistrequest = playlistrequestbuilder("Younger Brother Hits", "All Hits of Younger Brother",false);
@@ -43,6 +47,7 @@ public class PlaylistTests extends BaseTest{
 
         Playlist playlistresponse = response.as(Playlist.class);
         AssertionResponse(playlistresponse,playlistrequest);
+
     }
 
     @Test(description = "Test Will Update Playlist")
